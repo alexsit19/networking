@@ -4,13 +4,11 @@ import 'package:networking/screens/second_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    final args = settings.arguments;
-
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (context) => FirstScreen());
+        return MaterialPageRoute(builder: (context) => const FirstScreen());
       case '/second':
-        return MaterialPageRoute(builder: (context) => SecondScreen());
+        return MaterialPageRoute(builder: (context) => const SecondScreen());
       default:
         return _errorRoute();
     }
