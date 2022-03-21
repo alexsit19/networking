@@ -43,7 +43,7 @@ class SecondScreen extends StatelessWidget {
             albumData.map((element) => Album.fromJson(element)).toList();
         return listAlbums;
       } else {
-        throw Exception("Failed to load albums");
+        throw Exception("Failed to load albums"); //в реальных приложениях выкидывают ексепшены?
       }
     } catch (e) {
       print("erroR: $e"); //что выводить/делать в этом месте? #comment
