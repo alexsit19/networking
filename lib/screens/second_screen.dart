@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:networking/data/album.dart';
@@ -15,18 +13,18 @@ class SecondScreen extends StatelessWidget {
       ),
       body: FutureBuilder<List<dynamic>?>(
           future: getHttp(),
-          builder: (BuildContext context, AsyncSnapshot<List?> list) {
-            Widget child;
-            if (list.hasData) {
-              child = ListAlbums(list: list);
-            } else if (list.hasError) {
-              child = Center(
-                child: Text("${list.error}"),
-              );
-            } else {
-              child = const Center(
-                child: CircularProgressIndicator(),
-              );
+          builder: (context, snapshot) {
+            Widget child = const Center(
+              child: CircularProgressIndicator(),
+            );
+            if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasError) {
+                child = const Center(
+                  child: Text("We have an error"),
+                );
+              } else if (snapshot.hasData) {
+                child = ListAlbums(list: snapshot);
+              }
             }
             return child;
           }),
@@ -34,21 +32,23 @@ class SecondScreen extends StatelessWidget {
   }
 
   Future<List<Album>?> getHttp() async {
+    Dio dio = Dio();
+    dio.options.connectTimeout = 5000;
+    dio.options.receiveTimeout = 30000;
     try {
       Response response =
-          await Dio().get('https://jsonplaceholder.typicode.com/posts');
+          await dio.get('https://jsonplaceholder.typicode.com/posts');
       if (response.statusCode == 200) {
         var albumData = response.data as List;
         var listAlbums =
             albumData.map((element) => Album.fromJson(element)).toList();
         return listAlbums;
       } else {
-        throw Exception("Failed to load albums"); //в реальных приложениях выкидывают ексепшены?
+        throw Exception("Failed to load albums");
       }
-    } catch (e) {
-      print("erroR: $e"); //что выводить/делать в этом месте? #comment
+    } catch (error) {
+      return Future.error("$error");
     }
-    return null;
   }
 }
 

@@ -26,7 +26,7 @@ class _FirstScreenState extends State<FirstScreen> {
           children: [
             ElevatedButton(
               onPressed: () {
-               _navigateAndGetData(context);
+                _navigateAndGetData(context);
               },
               child: const Text("Go to SecondScreen"),
             ),
