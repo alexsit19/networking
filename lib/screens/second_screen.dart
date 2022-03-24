@@ -20,7 +20,12 @@ class SecondScreen extends StatelessWidget {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasError) {
                 child = const Center(
-                  child: Text("We have an error"),
+                  child: Text(
+                    "We have an error",
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
                 );
               } else if (snapshot.hasData) {
                 child = ListAlbums(list: snapshot);
@@ -43,12 +48,11 @@ class SecondScreen extends StatelessWidget {
         var listAlbums =
             albumData.map((element) => Album.fromJson(element)).toList();
         return listAlbums;
-      } else {
-        throw Exception("Failed to load albums");
       }
     } catch (error) {
       return Future.error("$error");
     }
+    return null;
   }
 }
 
