@@ -1,16 +1,19 @@
-# networking
+# flutter_localization
 
 A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+For download this project. use next command
 
-A few resources to get you started if this is your first Flutter project:
+git clone <git@github.com:alexsit19/flutter_module_11.git>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+next step: open flutter_localisation in Android Studio
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+than run command: git checkout develop
+
+in android studio go in file/settings choose Languages & Frameworks
+choose Dart point and enter path to dart on your hard disc
+
+in terminal of Android Studio run command flutter run
+ 
